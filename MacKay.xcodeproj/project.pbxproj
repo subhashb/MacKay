@@ -13,6 +13,8 @@
 		FAE889441AE165EB00727CB3 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE889421AE165EB00727CB3 /* MainMenu.xib */; };
 		FAE889501AE165EB00727CB3 /* MacKayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE8894F1AE165EB00727CB3 /* MacKayTests.m */; };
 		FAE8895B1AE1664A00727CB3 /* DropView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE8895A1AE1664A00727CB3 /* DropView.m */; };
+		FAE889611AE1841D00727CB3 /* Uploader.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE889601AE1841D00727CB3 /* Uploader.m */; };
+		FAE889631AE189C600727CB3 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE889621AE189C500727CB3 /* libz.1.2.5.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,9 @@
 		FAE8894F1AE165EB00727CB3 /* MacKayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacKayTests.m; sourceTree = "<group>"; };
 		FAE889591AE1664A00727CB3 /* DropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropView.h; sourceTree = "<group>"; };
 		FAE8895A1AE1664A00727CB3 /* DropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropView.m; sourceTree = "<group>"; };
+		FAE8895F1AE1841D00727CB3 /* Uploader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Uploader.h; sourceTree = "<group>"; };
+		FAE889601AE1841D00727CB3 /* Uploader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Uploader.m; sourceTree = "<group>"; };
+		FAE889621AE189C500727CB3 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAE889631AE189C600727CB3 /* libz.1.2.5.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +67,7 @@
 		FAE8892D1AE165EB00727CB3 = {
 			isa = PBXGroup;
 			children = (
+				FAE889621AE189C500727CB3 /* libz.1.2.5.dylib */,
 				FAE889381AE165EB00727CB3 /* MacKay */,
 				FAE8894C1AE165EB00727CB3 /* MacKayTests */,
 				FAE889371AE165EB00727CB3 /* Products */,
@@ -85,6 +92,8 @@
 				FAE889421AE165EB00727CB3 /* MainMenu.xib */,
 				FAE889591AE1664A00727CB3 /* DropView.h */,
 				FAE8895A1AE1664A00727CB3 /* DropView.m */,
+				FAE8895F1AE1841D00727CB3 /* Uploader.h */,
+				FAE889601AE1841D00727CB3 /* Uploader.m */,
 				FAE889391AE165EB00727CB3 /* Supporting Files */,
 			);
 			path = MacKay;
@@ -216,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAE8893F1AE165EB00727CB3 /* main.m in Sources */,
+				FAE889611AE1841D00727CB3 /* Uploader.m in Sources */,
 				FAE8895B1AE1664A00727CB3 /* DropView.m in Sources */,
 				FAE8893D1AE165EB00727CB3 /* AppDelegate.m in Sources */,
 			);

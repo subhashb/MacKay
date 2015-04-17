@@ -7,6 +7,7 @@
 //
 
 #import "DropView.h"
+#import "Uploader.h"
 
 @implementation DropView
 @synthesize image;
@@ -66,18 +67,29 @@
 }
 
 - (BOOL) prepareForDragOperation:(id<NSDraggingInfo>)sender {
+    NSLog(@"3--->");
     return YES;
 }
 
 - (BOOL) performDragOperation:(id<NSDraggingInfo>)sender {
+    NSLog(@"2--->");
     if ([NSImage canInitWithPasteboard:[sender draggingPasteboard]]) {
         NSImage *newImage = [[NSImage alloc] initWithPasteboard:[sender draggingPasteboard]];
         [self setImage:newImage];
+    } else {
+        NSURL *fileURL;
+        fileURL = [NSURL URLFromPasteboard:[sender draggingPasteboard]];
+        [[Uploader alloc] initWithURL:[NSURL URLWithString:@"https://kaybus.dev/api/assets"]
+                               filePath:fileURL
+                               delegate:self
+                           doneSelector:@selector(onUploadDone:)
+                          errorSelector:@selector(onUploadError:)];
     }
     return YES;
 }
 
 - (void) concludeDragOperation:(id<NSDraggingInfo>)sender {
+    NSLog(@"1--->");
     [self setNeedsDisplay:YES];
 }
 

@@ -11,6 +11,7 @@
 @interface Uploader : NSObject {
     NSURL *serverURL;
     NSString *filePath;
+    NSString *fileName;
     id delegate;
     SEL doneSelector;
     SEL errorSelector;
@@ -20,6 +21,7 @@
 
 -   (id)initWithURL: (NSURL *)serverURL
            filePath: (NSString *)filePath
+           fileName: (NSString *)fileName
            delegate: (id)delegate
        doneSelector: (SEL)doneSelector
       errorSelector: (SEL)errorSelector;

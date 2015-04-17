@@ -50,6 +50,7 @@ static NSString * const FORM_FLE_INPUT = @"file";
 
 - (id)initWithURL: (NSURL *)aServerURL   // IN
          filePath: (NSString *)aFilePath // IN
+         fileName: (NSString *)aFileName // IN
          delegate: (id)aDelegate         // IN
      doneSelector: (SEL)aDoneSelector    // IN
     errorSelector: (SEL)anErrorSelector  // IN
@@ -57,12 +58,14 @@ static NSString * const FORM_FLE_INPUT = @"file";
     if ((self = [super init])) {
         ASSERT(aServerURL);
         ASSERT(aFilePath);
+        ASSERT(aFileName);
         ASSERT(aDelegate);
         ASSERT(aDoneSelector);
         ASSERT(anErrorSelector);
         
         serverURL = aServerURL;
         filePath = aFilePath;
+        fileName = aFileName;
         delegate = aDelegate;
         doneSelector = aDoneSelector;
         errorSelector = anErrorSelector;
@@ -183,6 +186,9 @@ static NSString * const FORM_FLE_INPUT = @"file";
     [urlRequest setValue:
      [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundry]
       forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:
+     [NSString stringWithFormat:@"Bearer 1c8e77c1f1b26119e57f8e88d0322288d5fda10c5fa8219534a070cd5cc4f4ad"]
+      forHTTPHeaderField:@"Authorization"];
     
     NSMutableData *postData =
     [NSMutableData dataWithCapacity:[data length] + 512];
@@ -190,15 +196,45 @@ static NSString * const FORM_FLE_INPUT = @"file";
      [[NSString stringWithFormat:@"--%@\r\n", boundry] dataUsingEncoding:NSUTF8StringEncoding]];
     [postData appendData:
      [[NSString stringWithFormat:
-       @"Content-Disposition: form-data; name=\"%@\"; filename=\"file.bin\"\r\n\r\n", FORM_FLE_INPUT]
+       @"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n\r\n", FORM_FLE_INPUT, fileName]
       dataUsingEncoding:NSUTF8StringEncoding]];
     [postData appendData:data];
     [postData appendData:
      [[NSString stringWithFormat:@"\r\n--%@--\r\n", boundry] dataUsingEncoding:NSUTF8StringEncoding]];
-    NSData *finalData = [[NSString stringWithFormat:@"{\"asset\":%@}", postData]  dataUsingEncoding:NSUTF8StringEncoding];
-    [urlRequest setHTTPBody:finalData];
+    [urlRequest setHTTPBody:postData];
     return urlRequest;
 }
+
+- (NSURLRequest *)postCourseRequestWithURL: (NSURL *)url        // IN
+                                  boundry: (NSString *)boundry // IN
+                                     data: (NSData *)data      // IN
+{
+    // from http://www.cocoadev.com/index.pl?HTTPFileUpload
+    NSMutableURLRequest *urlRequest =
+    [NSMutableURLRequest requestWithURL:url];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setValue:
+     [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundry]
+      forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:
+     [NSString stringWithFormat:@"Bearer 1c8e77c1f1b26119e57f8e88d0322288d5fda10c5fa8219534a070cd5cc4f4ad"]
+      forHTTPHeaderField:@"Authorization"];
+    
+    NSMutableData *postData =
+    [NSMutableData dataWithCapacity:[data length] + 512];
+    [postData appendData:
+     [[NSString stringWithFormat:@"--%@\r\n", boundry] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:
+     [[NSString stringWithFormat:
+       @"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n\r\n", FORM_FLE_INPUT, fileName]
+      dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:data];
+    [postData appendData:
+     [[NSString stringWithFormat:@"\r\n--%@--\r\n", boundry] dataUsingEncoding:NSUTF8StringEncoding]];
+    [urlRequest setHTTPBody:postData];
+    return urlRequest;
+}
+
 
 /*
  *-----------------------------------------------------------------------------

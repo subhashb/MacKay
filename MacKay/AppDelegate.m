@@ -22,6 +22,10 @@ NSStatusItem *statusItem;
     [statusItem setAction:@selector(showMainWindow:)];
     
     [[[NSApplication sharedApplication] mainWindow] setReleasedWhenClosed:NO];
+    
+    _dragLabel.hidden = NO;
+    _spinner.hidden = YES;
+    _uploadingLabel.hidden = YES;
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {

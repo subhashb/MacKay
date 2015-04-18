@@ -8,9 +8,9 @@
 
 #import "DropView.h"
 #import "Uploader.h"
+#import "AppDelegate.h"
 
 @implementation DropView
-@synthesize image;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
@@ -28,6 +28,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self registerForDraggedTypes:[NSArray arrayWithObject:NSURLPboardType]];
+        
         NSLog(@"Registered");
     }
     return self;
@@ -35,14 +36,9 @@
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
-    if (!image) {
-        [[NSColor grayColor] set];
-        NSRectFill(dirtyRect);
-    } else {
-        [image drawInRect:dirtyRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];
-    }
+    [[NSColor whiteColor] set];
+    NSRectFill(dirtyRect);
     NSLog(@"Drawing");
-    // Drawing code here.
 }
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender {
@@ -74,6 +70,12 @@
     NSURL *fileURL;
     fileURL = [NSURL URLFromPasteboard:[sender draggingPasteboard]];
     NSString *fileName = [fileURL lastPathComponent];
+    
+    ((AppDelegate *)[NSApplication sharedApplication].delegate).dragLabel.hidden = YES;
+    ((AppDelegate *)[NSApplication sharedApplication].delegate).spinner.hidden = NO;
+    ((AppDelegate *)[NSApplication sharedApplication].delegate).uploadingLabel.hidden = NO;
+    [((AppDelegate *)[NSApplication sharedApplication].delegate).uploadingLabel setStringValue:[NSString stringWithFormat:@"Uploading %@...", fileName]];
+    
     [[Uploader alloc] initWithURL:[NSURL URLWithString:@"https://kaybus.dev/api/assets"]
                            filePath:fileURL
                            fileName:fileName

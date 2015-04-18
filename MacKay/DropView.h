@@ -8,10 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface DropView : NSView <NSDraggingDestination> {
-    NSImage *image;
-}
-
-@property (retain) NSImage *image;
+@interface DropView : NSView <NSDraggingDestination>
 
 @end

@@ -13,6 +13,9 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="dragLabel" destination="48C-t3-Mct" id="oVX-Yx-A3R"/>
+                <outlet property="spinner" destination="1CF-FA-3EJ" id="Y4F-KJ-X4D"/>
+                <outlet property="uploadingLabel" destination="e8a-sL-fFg" id="GyD-d6-Loh"/>
                 <outlet property="window" destination="lgr-iP-hE4" id="C3t-tw-Wll"/>
             </connections>
         </customObject>
@@ -677,10 +680,38 @@
                 <subviews>
                     <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lgr-iP-hE4" customClass="DropView">
                         <rect key="frame" x="0.0" y="0.0" width="340" height="211"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e8a-sL-fFg">
+                                <rect key="frame" x="30" y="97" width="270" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Uploading..." id="NVi-dK-siK">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="48C-t3-Mct">
+                                <rect key="frame" x="70" y="159" width="200" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Drag and Drop files in this area" id="8Ed-jb-bDB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" red="0.0" green="0.50196081399917603" blue="0.25098040699958801" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <progressIndicator horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="1CF-FA-3EJ">
+                                <rect key="frame" x="162" y="63" width="16" height="16"/>
+                            </progressIndicator>
+                        </subviews>
                     </customView>
                 </subviews>
             </view>
             <point key="canvasLocation" x="426" y="199.5"/>
         </window>
+        <customObject id="R0c-JS-Ig7" customClass="DropView">
+            <connections>
+                <outlet property="dragLabel" destination="48C-t3-Mct" id="QWH-sA-Rcm"/>
+                <outlet property="uploadingLabel" destination="e8a-sL-fFg" id="5y1-Ia-OvQ"/>
+            </connections>
+        </customObject>
+        <userDefaultsController representsSharedInstance="YES" id="uoI-ZX-Tiw"/>
     </objects>
 </document>

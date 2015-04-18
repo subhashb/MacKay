@@ -10,6 +10,9 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
     @property (assign) IBOutlet NSWindow *window;
+    @property (weak) IBOutlet NSTextField *dragLabel;
+    @property (weak) IBOutlet NSTextField *uploadingLabel;
+    @property (weak) IBOutlet NSProgressIndicator *spinner;
 
 @end
 

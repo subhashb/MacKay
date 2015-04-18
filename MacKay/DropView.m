@@ -67,21 +67,30 @@
 }
 
 - (BOOL) performDragOperation:(id<NSDraggingInfo>)sender {
-    NSURL *fileURL;
-    fileURL = [NSURL URLFromPasteboard:[sender draggingPasteboard]];
-    NSString *fileName = [fileURL lastPathComponent];
+    NSPasteboard *pboard = [sender draggingPasteboard];
+    NSArray *urls;
+    if ([[pboard types] containsObject:NSURLPboardType]) {
+        urls = [pboard readObjectsForClasses:@[[NSURL class]] options:nil];
+        NSLog(@"URLs are: %@", urls);
+    }
     
-    ((AppDelegate *)[NSApplication sharedApplication].delegate).dragLabel.hidden = YES;
-    ((AppDelegate *)[NSApplication sharedApplication].delegate).spinner.hidden = NO;
-    ((AppDelegate *)[NSApplication sharedApplication].delegate).uploadingLabel.hidden = NO;
-    [((AppDelegate *)[NSApplication sharedApplication].delegate).uploadingLabel setStringValue:[NSString stringWithFormat:@"Uploading %@...", fileName]];
-    
-    [[Uploader alloc] initWithURL:[NSURL URLWithString:@"https://kaybus.dev/api/assets"]
-                           filePath:fileURL
-                           fileName:fileName
-                           delegate:self
-                       doneSelector:@selector(onUploadDone:)
-                      errorSelector:@selector(onUploadError:)];
+    for (NSString *item in urls) {
+        NSLog(@"%@", item);
+
+        NSString *fileName = [item lastPathComponent];
+        
+        ((AppDelegate *)[NSApplication sharedApplication].delegate).dragLabel.hidden = YES;
+        ((AppDelegate *)[NSApplication sharedApplication].delegate).spinner.hidden = NO;
+        ((AppDelegate *)[NSApplication sharedApplication].delegate).uploadingLabel.hidden = NO;
+        [((AppDelegate *)[NSApplication sharedApplication].delegate).uploadingLabel setStringValue:[NSString stringWithFormat:@"Uploading %@...", fileName]];
+        
+        [[Uploader alloc] initWithURL:[NSURL URLWithString:@"https://kaybus.dev/api/assets"]
+                               filePath:item
+                               fileName:fileName
+                               delegate:self
+                           doneSelector:@selector(onUploadDone:)
+                          errorSelector:@selector(onUploadError:)];
+    }
     return YES;
 }
 

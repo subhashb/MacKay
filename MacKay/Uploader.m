@@ -188,7 +188,7 @@ static NSString * const FORM_FLE_INPUT = @"file";
      [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundry]
       forHTTPHeaderField:@"Content-Type"];
     [urlRequest setValue:
-     [NSString stringWithFormat:@"Bearer 1c8e77c1f1b26119e57f8e88d0322288d5fda10c5fa8219534a070cd5cc4f4ad"]
+     [NSString stringWithFormat:@"Bearer abe44212cd35f05f3d560b2a58a5e5b9f0b185d97ff9a39735f405f11ee59bea"]
       forHTTPHeaderField:@"Authorization"];
     
     NSMutableData *postData =

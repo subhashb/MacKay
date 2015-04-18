@@ -36,7 +36,7 @@
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     if (!image) {
-        [[NSColor redColor] set];
+        [[NSColor grayColor] set];
         NSRectFill(dirtyRect);
     } else {
         [image drawInRect:dirtyRect fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1];

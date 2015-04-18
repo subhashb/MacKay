@@ -35,10 +35,12 @@
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
-    [super drawRect:dirtyRect];
-    [[NSColor whiteColor] set];
+    // add a background image
+    NSColor *backgroundColor = [NSColor colorWithPatternImage:[NSImage imageNamed:@"kaybus_logo.png"]];
+    [backgroundColor setFill];
     NSRectFill(dirtyRect);
-    NSLog(@"Drawing");
+    
+    [super drawRect:dirtyRect];
 }
 
 - (NSDragOperation)draggingEntered:(id<NSDraggingInfo>)sender {
